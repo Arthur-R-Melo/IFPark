@@ -43,6 +43,9 @@ def detect(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fa
         class_ids = []
         confidences = []
         boxes = []
+        
+        crop_img = []
+        crop_rez = []
 
         # Loop to predict plates
         for out in outs:
@@ -80,6 +83,10 @@ def detect(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fa
                 crop = img[y:y+h, x:x+w]
                 cropped_plate.append(crop)
                 cv2.putText(img, label, (x, y-20), font, text_font_size, (255, 255, 80), 2)
+                
+                #teste
+                crop_img.append(crop)
+                
         
         no_of_detected_plates = len(crop_rect)
         confidences = confidences[-no_of_detected_plates:]
@@ -96,6 +103,33 @@ def detect(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fa
         # Display output (prediction)
         file_path = img_name.split("/")
         file_name = file_path[-1]
+        
+        #teste
+        
+        for i in range(len(crop_img)):
+            rez = cv2.resize(crop_img[i],None,fx=2,fy=2)
+            crop_rez.append(rez)
+
+        if(no_of_detected_plates > 0):
+            #Show image (default show image)
+            if(hide_img):
+                pass
+            else:
+                for i in range(len(crop_img)):
+                    cv2.imshow("Output Image (Cropped plate)",crop_rez[i])
+                    key = cv2.waitKey(2000) & 0xFF
+                    if key == ord('q'):
+                        cv2.destroyAllWindows()
+
+            # Display input 
+            inp_path = img_name.split("/")
+            inpFile = inp_path[-1]
+            file_ = inpFile.split(".")
+            inp_file_name = file_[0]  #filename provided
+            inp_file_ext = file_[1] #file extension
+
+            display_top()
+        #fim do teste
 
         #Silence output or not
 
@@ -144,6 +178,18 @@ def detect(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fa
                         display_error()
                         print("Oops an unknown error occured")
                         print("\n##################################################\n")
+                if('plates' in os.listdir('./')):
+                        try:
+                            for i in range(len(crop_img)):
+                                cv2.imwrite("plates/"+file_name,crop_rez[i])
+                            print("Detected plates saved in 'plates' directory")
+                            print("\n##################################################\n")
+                            
+                        except Exception as e:
+                            display_error()
+                            print("Oops an unknown error occured")
+                            print("\n##################################################\n")
+
 
             elif(save_img.lower() == 'none'): #Don't save image
                 pass
@@ -253,6 +299,8 @@ def crop(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fals
         
         no_of_detected_plates = len(crop_rect)
         confidences = confidences[-no_of_detected_plates:]
+        
+        
 
         for i in range(len(crop_img)):
             rez = cv2.resize(crop_img[i],None,fx=2,fy=2)
