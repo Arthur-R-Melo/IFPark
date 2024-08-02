@@ -80,7 +80,7 @@
         <div class="white-container">
             <h1 id="titulo">LOGIN</h1>
 
-            <form class="login-container">
+            <div class="login-container">
                 <label for="email">E-mail:</label>
                 <input type="text" name="email" id="email" placeholder="Insira seu email" autofocus>
                 <br>
@@ -88,10 +88,11 @@
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" id="senha" placeholder="Insira sua senha">
                 <br><br>
-                <button>Realizar login</button>
-            </form>
+                <button onclick="enviar()">Realizar login</button>
+            </div>
         </div>
     </div>
+    <script src="javascript/login.js"></script>
 </body>
 
 </html>
