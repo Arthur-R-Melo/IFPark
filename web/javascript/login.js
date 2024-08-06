@@ -33,6 +33,7 @@ function validaEmail(email) {
 
 function processaDadoServidor() {
     if (request.responseText === "true") {
+        alert("Logou!!!");
         window.location.href = "index.html";
     } else {
         alert("Email ou senhas incorretos!");
