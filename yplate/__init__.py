@@ -3,11 +3,13 @@
 ## Detect car/vehicle Number plates easily
 
 import shutil
+import os
 from commands import detect
 from ops import model_config,display_top,load_model
 cfg,weights,classes = load_model()
 
-shutil.rmtree('plates')
+if('plates' in os.listdir('./')):
+    shutil.rmtree('plates')
 
 
 img = "images/car.jpg"
