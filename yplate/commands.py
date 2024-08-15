@@ -179,18 +179,30 @@ def detect(img_name,cfg,weights,classes,save_img=True,hide_img=False,hide_out=Fa
                         print("Oops an unknown error occured")
                         print("\n##################################################\n")
                 if('plates' in os.listdir('./')):
-                        try:
-                            for i in range(len(crop_img)):
-                                cv2.imwrite("plates/"+file_name,crop_rez[i])
-                            print("Detected plates saved in 'plates' directory")
-                            print("\n##################################################\n")
+                    try:
+                        for i in range(len(crop_img)):
+                            cv2.imwrite("plates/plate0" + str(i) + ".jpg",crop_rez[i])
+                        print("Detected plates saved in 'plates' directory")
+                        print("\n##################################################\n")
                             
-                        except Exception as e:
-                            display_error()
-                            print("Oops an unknown error occured")
-                            print("\n##################################################\n")
+                    except Exception as e:
+                        display_error()
+                        print("Oops an unknown error occured")
+                        print("\n##################################################\n")
 
-
+                else:
+                    os.mkdir('plates')
+                    try:
+                        for i in range(len(crop_img)):
+                            cv2.imwrite("plates/plate0" + str(i) + ".jpg",crop_rez[i])
+                        print("Detected plates saved in 'plates' directory")
+                        print("\n##################################################\n")
+                            
+                    except Exception as e:
+                        display_error()
+                        print("Oops an unknown error occured")
+                        print("\n##################################################\n")
+                    
             elif(save_img.lower() == 'none'): #Don't save image
                 pass
             elif(save_img != True):  #Custom name save image (if error then original name)
