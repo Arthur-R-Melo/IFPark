@@ -1,7 +1,12 @@
 body {
     background-color: #2b9f3f;
 }
+
 h1 {
     color: #2b9f3f;
     font-family: 'Times New Roman', Times, serif;
+}
+
+.navbar {
+    padding: 10px 20px;
 }
