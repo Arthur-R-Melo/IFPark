@@ -7,6 +7,10 @@ h1 {
     font-family: 'Times New Roman', Times, serif;
 }
 
+.text_nav {
+    color: #2b9f3f;
+}
+
 .navbar {
     padding: 10px 20px;
 }
