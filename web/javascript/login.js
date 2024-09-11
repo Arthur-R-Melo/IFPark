@@ -27,7 +27,9 @@ function validaEmail(email) {
 }
 
 function processaDadoServidor() {
-    if (request.responseText === "true") {
+    let response = JSON.parse(request.responseText)
+
+    if (response.response === "true") {
         alert("Logou!!!");
         window.location.href = "index.html";
     } else {
