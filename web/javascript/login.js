@@ -33,6 +33,6 @@ function processaDadoServidor() {
         alert("Logou!!!");
         window.location.href = "index.html";
     } else {
-        alert("Email ou senhas incorretos!");
+        alert("Usuário ou senhas incorretos!");
     }
 }
