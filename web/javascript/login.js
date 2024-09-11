@@ -11,22 +11,20 @@ function enviar() {
             request.onerror = function () {
                 alert(`ERROR: ${request.status}`);
             }
-            request.open('GET', `http://4.228.227.52:8080/atividadelogin/autenticar?user=${user}&senha=${password}`
+            request.open('GET', `/login.php?user=${user}&senha=${password}`
 
                 , true);
             request.send(null);
+            console.log('enviou!!!')
 
     } catch (exception) {
         alert('problema no envio de dados');
     }
 }
 
-function validaEmail(email) {
-    const regex = /^[^\s]+@[^\s]+\.[^\s]+$/;
-    return regex.test(email);
-}
 
 function processaDadoServidor() {
+    console.log("Aqui")
     let response = JSON.parse(request.responseText)
 
     if (response.response === "true") {
