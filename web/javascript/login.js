@@ -2,9 +2,8 @@ var request;
 
 function enviar() {
     try {
-        let email = document.getElementById("email").value;
+        let user = document.getElementById("email").value;
         let password = document.getElementById("senha").value;
-        if (validaEmail(email)) {
             request = new XMLHttpRequest();
             /*Alterei o evento pois com o readystatechange seria necessário verificar se o estado da requisição está como finalizado.
             Utilizando os eventos load e error creio que o código fica,além de tudo, mais legível*/
@@ -12,14 +11,10 @@ function enviar() {
             request.onerror = function () {
                 alert(`ERROR: ${request.status}`);
             }
-            request.open('GET', `http://4.228.227.52:8080/atividadelogin/autenticar?email=${email}&senha=${password}`
+            request.open('GET', `http://4.228.227.52:8080/atividadelogin/autenticar?user=${user}&senha=${password}`
 
                 , true);
             request.send(null);
-        } else {
-            alert("Email inválido");
-            return;
-        }
 
     } catch (exception) {
         alert('problema no envio de dados');
