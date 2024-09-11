@@ -14,4 +14,5 @@ function getConnection()
     if ($conn->connect_error) {
         die("Erro na conexão: " . $conn->connect_error);
     }
+    return $conn;
 }
