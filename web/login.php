@@ -10,19 +10,19 @@ $sql = 'SELECT * FROM administrador WHERE usuario = ?';
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $user);
 $stmt->execute();
-$result = $stmt->get_result();
+$resultado = $stmt->get_result();
 
 header('Content-Type: application/json');
 $result;
 
-if($result->num_rows > 0) {
-    $row = $stmt->fetch();
-    if($row['senha'] == $password) {
+if($resultado->num_rows > 0) {
+    $row = $resultado->fetch_assoc();
+    if($row['Senha'] == $password) {
         $result = [
             'response' => 'true',
-            'nome' => $row['nome'],
-            'acessLevel' => $row['niveldeacesso'],
-            'instituicao' => $row['instituicaoid']
+            'nome' => $row['Nome'],
+            'acessLevel' => $row['NivelDeAcesso'],
+            'instituicao' => $row['InstituicaoID']
         ];
     }else {
         $result = [

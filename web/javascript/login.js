@@ -24,9 +24,6 @@ function enviar() {
 
 
 function processaDadoServidor() {
-    console.log("Aqui")
-    console.log(request.responseText)
-    /*
     let response = JSON.parse(request.responseText)
 
     if (response.response === "true") {
@@ -34,5 +31,5 @@ function processaDadoServidor() {
         window.location.href = "index.html";
     } else {
         alert("Usuário ou senhas incorretos!");
-    }*/
+    }
 }
