@@ -15,13 +15,18 @@ $result = $stmt->get_result();
 header('Content-Type: application/json');
 $result;
 
-if($result->num_rows > 0 && $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+if($result->num_rows > 0) {
+    $row = $stmt->fetch();
     if($row['senha'] == $password) {
         $result = [
             'response' => 'true',
             'nome' => $row['nome'],
             'acessLevel' => $row['niveldeacesso'],
             'instituicao' => $row['instituicaoid']
+        ];
+    }else {
+        $result = [
+            'response' => 'false'
         ];
     }
 }else {
