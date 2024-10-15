@@ -1,7 +1,7 @@
 <?php
 include('connectionFactory.php');
 
-if (!isset($_POST['email']) || isset($_POST['senha'])) {
+if (!isset($_POST['email']) || !isset($_POST['senha'])) {
 ?>
     <script>
         alert("Email ou senha não foram informados!")
