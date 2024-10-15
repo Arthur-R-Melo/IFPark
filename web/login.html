@@ -7,92 +7,20 @@
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
 
-        #titulo {
-            color: #ce1218;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 40px;;
-        }
-
-        .login-container {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
-        }
-
-        .white-container {
-            background-color: white;
-            width: 20%;
-            min-width: 350px;
-            height: 60%;
-            min-height: 600px;
-            border-radius: 15px;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        .logo-image {
-            width: 300px;
-            height: auto;
-            max-width: 100%;
-            min-height: 300px;
-            min-width: 300px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-radius: 15px;
-            box-sizing: border-box;
-        }
-
-        .box {
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
-            flex: 1;
-            text-align: center;
-        }
-    
-    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="box">
-            <img src="images/IfParkIA.png" alt="logo image" class="logo-image">
-        </div>
-        <div class="white-container">
-            <h1 id="titulo">LOGIN</h1>
-
-            <div class="login-container">
-                <label for="email">E-mail:</label>
-                <input type="text" name="email" id="email" placeholder="Insira seu email" autofocus>
-                <br>
-                <br>
-                <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha" placeholder="Insira sua senha">
-                <br><br>
-                <button onclick="enviar()">Realizar login</button>
-            </div>
-        </div>
-    </div>
-    <script src="javascript/login.js"></script>
+    <form action="validaLogin.php" method="POST">
+        <label for="email">E-mail:</label>
+        <input type="text" name="email" id="email" placeholder="Insira seu email" autofocus>
+        <br>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" placeholder="Insira sua senha">
+        <br><br>
+        <input type="submit" value="Entrar">
+    </form>
 </body>
 
 </html>
