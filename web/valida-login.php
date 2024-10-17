@@ -9,6 +9,17 @@ if (!isset($_POST['email']) || !isset($_POST['senha'])) {
 ?>
     <script>
         alert("Email ou senha não foram informados!")
+        window.history.back();
+    </script>
+    <?php
+    die;
+}
+
+if (empty($_POST['email']) || empty($_GET['senha'])) {
+    ?>
+    <script>
+        alert("Email ou senha não foram informados!")
+        window.history.back();
     </script>
     <?php
     die;
@@ -36,7 +47,6 @@ $resultado = $stmt->get_result();
                 console.log("Funcionou")
             </script>
         <?php
-        echo "Aqui 1";
         } else {
         ?>
             <script>
@@ -44,7 +54,6 @@ $resultado = $stmt->get_result();
                 console.log("Senha errada")
             </script>
         <?php
-        echo "Aqui 2";
         }
     } else {
         ?>
@@ -53,13 +62,11 @@ $resultado = $stmt->get_result();
             console.log("Usuário não existe")
         </script>
 <?php
-    echo "Aqui 3";
     }
 } catch (Exception $e) {
     ?>
     <script>console.log(<?php addslashes($e)?>)</script>
     <?php
-    echo $e;
 }
 
 
