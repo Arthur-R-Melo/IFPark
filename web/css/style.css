@@ -1,7 +1,14 @@
 body {
     padding: 0;
+    background-color: #ebebeb;
     margin: 0;
 }
+
+.bai-jamjuree-bold {
+    font-family: "Bai Jamjuree", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
 
 header {
     background-color: #2B9F3F;
@@ -39,8 +46,18 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: #30803d;
-    color: white;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
+
+h1 {
+    color: #30803d;
+}
+
+#sobre-projeto {
+    margin: 50px;
+}
+
 
 #login-btn {
     padding: 1rem;
@@ -51,6 +68,7 @@ nav ul li a:hover {
 
 #login-btn:hover {
     background-color: #30803d;
+    text-decoration: none;
 }
 
 footer {
@@ -62,3 +80,4 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
