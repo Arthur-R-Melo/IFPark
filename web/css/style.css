@@ -8,7 +8,7 @@ body {
     font-family: "Bai Jamjuree", sans-serif;
     font-weight: 700;
     font-style: normal;
-  }
+}
 
 header {
     background-color: #2B9F3F;
@@ -48,27 +48,35 @@ nav ul li a:hover {
     background-color: #30803d;
     color: rgb(255, 255, 255);
     text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.2, 1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
     color: #30803d;
 }
 
-#sobre-projeto {
-    margin: 50px;
-}
-
-
 #login-btn {
     padding: 1rem;
     background-color: #3a9449;
     color: white;
     margin-left: auto;
+
 }
 
 #login-btn:hover {
     background-color: #30803d;
     text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.2, 1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 footer {
@@ -81,3 +89,26 @@ footer {
     bottom: 0;
 }
 
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    margin: 10px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.2, 1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    max-height: 200px;
+    object-fit: cover;
+}
