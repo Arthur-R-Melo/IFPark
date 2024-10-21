@@ -3,6 +3,11 @@
 </html>
 
 <?php
+session_set_cookie_params(['httponly' => true]);
+
+session_start();
+
+session_regenerate_id(true);
 include('connectionFactory.php');
 
 if (!isset($_POST['email']) || !isset($_POST['senha'])) {
@@ -41,13 +46,18 @@ $resultado = $stmt->get_result();
     if ($resultado->num_rows > 0) {
         $rows = $resultado->fetch_assoc();
         if ($rows['senha'] === $password) {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['ID_adm'] = $resultado['ID'];
+            $_SESSION['nome'] = $resultado['nome']
     ?>
             <script>
                 alert("Funcionou")
                 console.log("Funcionou")
             </script>
         <?php
+        
         } else {
+            $_SESSION['logged_in'] = false;
         ?>
             <script>
                 alert("Senha errada")
@@ -56,6 +66,7 @@ $resultado = $stmt->get_result();
         <?php
         }
     } else {
+        $_SESSION['logged_in'] = false;
         ?>
         <script>
             alert("Usuário não existe")
@@ -64,6 +75,7 @@ $resultado = $stmt->get_result();
 <?php
     }
 } catch (Exception $e) {
+    $_SESSION['logged_in'] = false;
     ?>
     <script>console.log(<?php addslashes($e)?>)</script>
     <?php
