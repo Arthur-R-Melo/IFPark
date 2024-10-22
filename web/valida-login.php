@@ -25,7 +25,7 @@ if (!isset($_POST['email']) || !isset($_POST['senha']) || empty($_POST['email'])
 }
 
 try {
-
+    
     $conn = getConnection();
     $user = $_POST['email'];
     $password = $_POST['senha'];
@@ -54,7 +54,10 @@ try {
 
         $_SESSION['logged_in'] = true;
         $_SESSION['ID_adm'] = $resultado['ID'];
-        $_SESSION['nome'] = $resultado['nome']
+        $_SESSION['nome'] = $resultado['nome'];
+        $_SESSION['instituicao_ID'] = $resultado['instituicao'];
+        $_SESSION['nivelAcesso'] = $resultado['nivelDeAcesso'];
+        $_SESSION['email'] = $resultado['email'];
     ?>
         <script>
             alert("Funcionou")
