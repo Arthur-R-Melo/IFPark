@@ -14,7 +14,7 @@ $_SESSION['logged_in'] = false;
 
 include('connectionFactory.php');
 
-if (!isset($_POST['email']) || !isset($_POST['senha']) || empty($_POST['email']) || empty($_GET['senha'])) {//Caso verdadeiro o código volta a página ou morre depois do if
+if (!isset($_POST['email']) || !isset($_POST['senha'])) {//Caso verdadeiro o código volta a página ou morre depois do if
 ?>
     <script>
         alert("Email ou senha não foram informados!")
