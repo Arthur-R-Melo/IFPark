@@ -26,12 +26,5 @@ if ($result->num_rows>0) {
     $data = array(
         "existe" => "false"
     );
-}
-?>
-<script>
-    alert("Ta rodando certinho")
-    console.log(<?php $result->num_rows>0 ?>)
-</script>
-<?php
-echo json_encode($data);
+}echo json_encode($data);
 ?>
