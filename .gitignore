@@ -1,3 +1,7 @@
 /yplate/input/weights
 /yplate/yolov3.weights
+<<<<<<< Updated upstream
 web/infoDB.php
+=======
+/web/test/keys.py
+>>>>>>> Stashed changes
