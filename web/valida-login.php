@@ -50,7 +50,7 @@ try {
 
     $rows = $resultado->fetch_assoc();
 
-    if ($rows['senha'] === $password) {
+    if (password_verify($password, $rows['senha'])) {
 
         $_SESSION['logged_in'] = true;
         $_SESSION['ID_adm'] = $rows['ID'];
