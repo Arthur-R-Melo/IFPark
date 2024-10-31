@@ -8,7 +8,7 @@ function getConnection()
     $host = $config['host'];
     $username = $config['username'];
     $password = $config['password'];
-    $database = $config['dbname'];
+    $database = $config['database'];
 
     $conn = new mysqli($host, $username, $password, $database);
     if ($conn->connect_error) {
