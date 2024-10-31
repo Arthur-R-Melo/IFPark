@@ -22,21 +22,26 @@
             <li><a id="login-btn" href="login.html">LOGIN</a></li>
         </ul>
     </nav>
-  
+
 
     <div class="container" id="form-container">
-        <form action="valida-login.php">
+        <h1 id="h1-login">LOGIN</h1>
+        <br>
+        <form action="valida-login.php" method="POST">
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email"
-                    placeholder="Insira seu email">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Insira seu email">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha" name="senha"
-                    placeholder="Insira sua senha">
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Insira sua senha">
             </div>
-            <input type="submit" value="Entrar">
+            <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <input type="submit" value="Entrar" class="btn btn-success" type="button">
+                <a class="btn btn-outline-secondary" href="cadastro.html">Cadastrar</a>
+
+            </div>
         </form>
     </div>
 
