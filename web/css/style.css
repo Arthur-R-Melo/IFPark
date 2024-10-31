@@ -151,5 +151,9 @@ footer {
 
 
 #form-container {
-    padding: 10%;
+    margin: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-style: inset;
+    border-color: red;
 }
