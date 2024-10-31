@@ -4,7 +4,7 @@
 
 function getConnection()
 {
-    $config = include('infoDB.php');
+    include('infoDB.php');
     $host = $config['host'];
     $username = $config['username'];
     $password = $config['password'];

@@ -14,7 +14,7 @@ $_SESSION['logged_in'] = false;
 
 include('connectionFactory.php');
 
-if (!isset($_POST['email']) || !isset($_POST['senha']) || empty($_POST['email']) || empty($_GET['senha'])) {//Caso verdadeiro o código volta a página ou morre depois do if
+if (!isset($_POST['email']) || !isset($_POST['senha'])) {//Caso verdadeiro o código volta a página ou morre depois do if
 ?>
     <script>
         alert("Email ou senha não foram informados!")
@@ -53,11 +53,11 @@ try {
     if ($rows['senha'] === $password) {
 
         $_SESSION['logged_in'] = true;
-        $_SESSION['ID_adm'] = $resultado['ID'];
-        $_SESSION['nome'] = $resultado['nome'];
-        $_SESSION['instituicao_ID'] = $resultado['instituicao'];
-        $_SESSION['nivelAcesso'] = $resultado['nivelDeAcesso'];
-        $_SESSION['email'] = $resultado['email'];
+        $_SESSION['ID_adm'] = $rows['ID'];
+        $_SESSION['nome'] = $rows['nome'];
+        $_SESSION['instituicao_ID'] = $rows['instituicao'];
+        $_SESSION['nivelAcesso'] = $rows['nivelDeAcesso'];
+        $_SESSION['email'] = $rows['email'];
     ?>
         <script>
             alert("Funcionou")
@@ -79,11 +79,12 @@ try {
 } catch (Exception $e) {
     ?>
     <script>
-        alert("Ocorreu uma exceção!!")
+        alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
         console.log(<?php addslashes($e) ?>)
-        window.history.back();
+       // window.history.back();
     </script>
 <?php
+    echo addslashes($e);
 }
 
 
