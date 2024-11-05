@@ -1,37 +1,39 @@
 <?php
 include('connectionFactory.php');
 
-if (!(isset($_GET['placa']) && !empty($_GET['placa']))) {
-    die;
+if (isset($_GET['placa']) && isset($_GET['id'])) {
+    header('Content-Type: application/json');
+    $data = consultaPlaca($_GET['placa'], $_GET['id']);
+    echo json_encode($data);
 }
 
-$placa = $_GET['placa'];
-$conn = getConnection();
 
-$sql = 'SELECT * FROM Carro WHERE placa = ?';
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $placa);
-$stmt->execute();
-$result = $stmt->get_result();
 
-header('Content-Type: application/json');
 
-$data;
+function consultaPlaca($placa, $idEmpresa)
+{
+    try {
+        $conn = getConnection();
+        $sql = 'SELECT * FROM Carro WHERE placa = ? AND instituicao = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $placa, $idEmpresa);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-if ($result->num_rows>0) {
-    $data = array(
-        "existe" => "true"
-    );
-}else {
-    $data = array(
-        "existe" => "false"
-    );
+        if ($result->num_rows > 0) {
+            $data = array(
+                "existe" => "true"
+            );
+        } else {
+            $data = array(
+                "existe" => "false"
+            );
+        }
+        return $data;
+    } catch (Exception $e) {
+        echo $e;
+        return array(
+            "existe" => "false"
+        );
+    }
 }
-?>
-<script>
-    alert("Ta rodando certinho")
-    console.log(<?php $result->num_rows>0 ?>)
-</script>
-<?php
-echo json_encode($data);
-?>

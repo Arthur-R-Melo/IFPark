@@ -79,6 +79,16 @@ h1 {
     color: #30803d;
 }
 
+footer {
+    background-color: #3a9449;
+    color: white;
+    text-align: center;
+    padding: 1px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 #login-btn {
     padding: 1rem;
     background-color: #3a9449;
@@ -96,16 +106,6 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.2, 1.2);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-footer {
-    background-color: #3a9449;
-    color: white;
-    text-align: center;
-    padding: 1px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
 
 
@@ -144,4 +144,17 @@ footer {
 .card img {
     max-height: 200px;
     object-fit: cover;
+}
+
+
+/*login*/
+#h1-login {
+    text-align: center;
+    color: #30803d;
+}
+
+#form-container {
+    padding: 20%;
+    padding-top: 7%;
+
 }

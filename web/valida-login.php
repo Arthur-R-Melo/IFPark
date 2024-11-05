@@ -50,7 +50,7 @@ try {
 
     $rows = $resultado->fetch_assoc();
 
-    if ($rows['senha'] === $password) {
+    if (password_verify($password, $rows['senha'])) {
 
         $_SESSION['logged_in'] = true;
         $_SESSION['ID_adm'] = $rows['ID'];
@@ -81,7 +81,7 @@ try {
     <script>
         alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
         console.log(<?php addslashes($e) ?>)
-        window.history.back();
+       // window.history.back();
     </script>
 <?php
     echo addslashes($e);
