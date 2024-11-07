@@ -14,7 +14,7 @@ $_SESSION['logged_in'] = false;
 
 include('connectionFactory.php');
 
-if (!isset($_POST['email']) || !isset($_POST['senha']) || !isset($_POST['administrador'])) {//Caso verdadeiro o código volta a página ou morre depois do if
+if (!isset($_POST['email']) || !isset($_POST['senha']) || !isset($_POST['administrador'])) { //Caso verdadeiro o código volta a página ou morre depois do if
 ?>
     <script>
         alert("Email ou senha não foram informados!")
@@ -25,25 +25,25 @@ if (!isset($_POST['email']) || !isset($_POST['senha']) || !isset($_POST['adminis
 }
 
 try {
-    
+
     $conn = getConnection();
     $user = $_POST['email'];
     $password = $_POST['senha'];
 
-    if($_POST['administrador'] == 'adm') {
+    if ($_POST['administrador'] == 'adm') {
         $sql = 'SELECT * FROM Administrador WHERE user = ?';
-    }else {
+    } else {
         $sql = 'SELECT * FROM Instituicao WHERE email = ?';
     }
 
-    
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $user);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
 
-    if ($resultado->num_rows <= 0) {//Caso verdadeiro o código volta a página ou morre depois do if
+    if ($resultado->num_rows <= 0) { //Caso verdadeiro o código volta a página ou morre depois do if
     ?>
         <script>
             alert("Usuário/Instituição não existe")
@@ -51,7 +51,7 @@ try {
             window.history.back();
         </script>
     <?php
-    die();
+        die();
     }
 
     $rows = $resultado->fetch_assoc();
@@ -59,11 +59,19 @@ try {
     if (password_verify($password, $rows['senha'])) {
 
         $_SESSION['logged_in'] = true;
-        $_SESSION['ID_adm'] = $rows['ID'];
         $_SESSION['nome'] = $rows['nome'];
-        $_SESSION['instituicao_ID'] = $rows['instituicao'];
-        $_SESSION['nivelAcesso'] = $rows['nivelDeAcesso'];
         $_SESSION['email'] = $rows['email'];
+
+        if ($_POST['administrador'] == 'adm') {
+            $_SESSION['ID'] = $rows['ID'];
+            $_SESSION['instituicao_ID'] = $rows['instituicao'];
+            $_SESSION['nivelAcesso'] = $rows['nivelDeAcesso'];
+        }else {
+            $_SESSION['instituicao_ID'] = $rows['ID'];
+            $_SESSION['documento'] = $rows['doc'];
+        }
+
+
     ?>
         <script>
             alert("Funcionou")
@@ -72,7 +80,7 @@ try {
         </script>
     <?php
 
-    } else {//Caso verdadeiro o código volta a página ou morre depois do else
+    } else { //Caso verdadeiro o código volta a página ou morre depois do else
     ?>
         <script>
             alert("Senha errada")
@@ -80,14 +88,14 @@ try {
             window.history.back();
         </script>
     <?php
-    die();
+        die();
     }
 } catch (Exception $e) {
     ?>
     <script>
         alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
         console.log(<?php addslashes($e) ?>)
-       // window.history.back();
+        // window.history.back();
     </script>
 <?php
     echo addslashes($e);
