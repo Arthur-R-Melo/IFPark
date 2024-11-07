@@ -76,9 +76,10 @@ try {
         <script>
             alert("Funcionou")
             console.log("Funcionou")
-            window.history.back();
         </script>
     <?php
+    header("Location: logedin.php");
+    exit;
 
     } else { //Caso verdadeiro o código volta a página ou morre depois do else
     ?>
