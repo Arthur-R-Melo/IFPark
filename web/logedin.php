@@ -25,7 +25,7 @@
     <script>
         function exclude(id) {
             if (confirm("Realmente deseja excluir esse carro?")) {
-                
+                window.location.href="control/excluir_carro.php?id"+id;
             }
         }
     </script>
