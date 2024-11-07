@@ -89,26 +89,6 @@ footer {
     bottom: 0;
 }
 
-#login-btn {
-    padding: 1rem;
-    background-color: #3a9449;
-    color: white;
-    margin-left: auto;
-
-}
-
-#login-btn:hover {
-    background-color: #30803d;
-    text-decoration: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: scale(1.2, 1.2);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-
 .card {
     margin: 10px;
     flex: 1;
