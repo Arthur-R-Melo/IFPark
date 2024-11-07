@@ -14,7 +14,7 @@ $_SESSION['logged_in'] = false;
 
 include('connectionFactory.php');
 
-if (!isset($_POST['email']) || !isset($_POST['senha'])) {//Caso verdadeiro o código volta a página ou morre depois do if
+if (!isset($_POST['email']) || !isset($_POST['senha']) || !isset($_POST['administrador'])) {//Caso verdadeiro o código volta a página ou morre depois do if
 ?>
     <script>
         alert("Email ou senha não foram informados!")
@@ -30,7 +30,13 @@ try {
     $user = $_POST['email'];
     $password = $_POST['senha'];
 
-    $sql = 'SELECT * FROM Administrador WHERE user = ?';
+    if($_POST['administrador'] == 'adm') {
+        $sql = 'SELECT * FROM Administrador WHERE user = ?';
+    }else {
+        $sql = 'SELECT * FROM Instituicao WHERE email = ?';
+    }
+
+    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $user);
     $stmt->execute();
@@ -40,7 +46,7 @@ try {
     if ($resultado->num_rows <= 0) {//Caso verdadeiro o código volta a página ou morre depois do if
     ?>
         <script>
-            alert("Usuário não existe")
+            alert("Usuário/Instituição não existe")
             console.log("Usuário não existe")
             window.history.back();
         </script>
