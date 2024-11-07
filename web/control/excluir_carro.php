@@ -22,5 +22,12 @@ if (isset($_GET['idCarro'])) {
         </script>
         <?php
     }
+}else{
+    ?>
+    
+    <script>
+    alert("Aqui")
+    window.history.back()</script>
+    <?php
 }
 ?>
