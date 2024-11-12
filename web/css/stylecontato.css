@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.cardcontact {
+    background-color: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.cardcontact:hover {
+    transform: scale(1.05);
+}
+
+.cardcontact img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 1.5em;
+    margin-top: 15px;
+    color: #333;
+}
+
+.email {
+    font-size: 1em;
+    color: #666;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .cardcontact {
+        width: 100%;
+    }
+}
+
