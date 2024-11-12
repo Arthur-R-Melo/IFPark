@@ -66,9 +66,17 @@ try {
             $_SESSION['ID'] = $rows['ID'];
             $_SESSION['instituicao_ID'] = $rows['instituicao'];
             $_SESSION['nivelAcesso'] = $rows['nivelDeAcesso'];
+            $sql = 'SELECT nome FROM Instituicao WHERE ID = ?';
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('s', $_SESSION['instituicao_ID']);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $rows = $resultado->fetch_assoc();
+            $_SESSION['instituicaoNome'] = $rows['nome'];
         }else {
             $_SESSION['instituicao_ID'] = $rows['ID'];
             $_SESSION['documento'] = $rows['doc'];
+            $_SESSION['instituicaoNome'] = $rows['nome'];
         }
 
 
