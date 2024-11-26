@@ -12,15 +12,16 @@ body {
 }
 
 .texto {
-    background-color: #e0f7e9;
-    border: 2px solid #2B9F3F;
-    border-radius: 10px;
-    padding: 20px;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+    padding: 100px;
     width: 100%;
     margin-top: 20px;
     height: 400px;
+    background-color: rgb(238, 238, 238);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    color: #2B9F3F;
+    color: #000000;
 }
 
 .texto p {
@@ -94,37 +95,40 @@ footer {
     flex: 1;
     min-width: 250px;
     max-width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Necessário para isolar o card-info */
+    height: auto; /* Ajusta a altura do card automaticamente */
 }
 
 .card-info {
-    display: none; 
+    display: none;
     padding: 10px;
     background-color: #ffffff;
     border-top: 1px solid #ccc;
+    position: absolute; /* Torna o card-info isolado dentro do card */
+    bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1; 
+    z-index: 1;
 }
 
-
 .card:hover .card-info {
-    display: block;
-
+    display: block; /* Apenas o card-info do card hover é mostrado */
 }
 
 .card:hover {
-    transform: scale(1.2, 1.2);
+    transform: scale(1.1); /* Ajuste de escala mais suave */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
-
-
 .card img {
     max-height: 200px;
     object-fit: cover;
+    width: 100%;
+    display: block; /* Garante que a imagem não cause problemas */
 }
+
 
 
 /*login*/
