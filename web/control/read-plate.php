@@ -12,15 +12,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $temp = $image['tmp_name'];
 
         if (is_uploaded_file($temp)) {
-            $command = escapeshellcmd("alpr -c br -n 5". escapeshellarg($temp));
+            try {
+                $command = escapeshellcmd("alpr -c br -n 5". escapeshellarg($temp));
 
-            $output = shell_exec($command);
-
-            $response = [
-                "status" => "success",
-                "id" => $id,
-                "alpr_output" => $output, // Saída do OpenALPR
-            ];
+                $output = shell_exec($command);
+    
+                $response = [
+                    "status" => "success",
+                    "id" => $id,
+                    "alpr_output" => $output, // Saída do OpenALPR
+                ];
+            } catch (Exception $e) {
+                $response = [
+                    "status" => "error",
+                    "message" => addslashes($e->getMessage())
+                ];
+            }
+            
 
         }else {
             $response = ["status" => "error", "message" => "Falha ao processar o arquivo enviado"];
