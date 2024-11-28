@@ -13,15 +13,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (is_uploaded_file($temp) && exif_imagetype($temp)) {
             try {
-                $command = escapeshellcmd("alpr -c br -n 5 placabrasil.jpg"/*. escapeshellarg($temp)*/);
+                $script = './alpr_service.sh';
+                $command = escapeshellcmd("$script placabrasil.jpg");
 
                 $output = shell_exec($command);
 
-                $response = [
-                    "status" => "success",
-                    "id" => $id,
-                    "alpr_output" => $output, // Saída do OpenALPR
-                ];
+                $response = json_decode($output);
+
+                if(isset($response['error'])){
+                    $response = [
+                        "status" => "error",
+                        "message" => "Imagem não encontrada"
+                    ];
+                }else{
+                    $response = [
+                        "status" => "success",
+                        "id" => $id,
+                        "alpr_output" => $output, // Saída do OpenALPR
+                    ];
+                }
             } catch (Exception $e) {
                 $response = [
                     "status" => "error",
