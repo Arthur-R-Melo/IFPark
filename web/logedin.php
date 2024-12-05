@@ -37,48 +37,6 @@ $resultado = $stmt->get_result();
             <li><a href="cadastroCarro.html">CADASTRAR NOVO CARRO</a></li>
         </ul>
     </nav>
-    <script>
-        function exclude(id) {
-            if (confirm("Realmente deseja excluir esse carro?")) {
-                window.location.href = "control/excluir_carro.php?idCarro=" + id;
-            }
-        }
-    </script>
-    <?php echo $_SESSION['instituicaoNome'];?>
-    
-    <br>
-    <h1 style="text-align: center;">CARROS CADASTRADOS</h1>
-
-    <?php
-    if ($resultado->num_rows > 0) {
-    ?>
-        <table class="table table-striped">
-            <thead>
-                <th>Proprietario</th>
-                <th>Placa</th>
-                <th>Editar</th>
-                <th>Excluir</th>
-            </thead>
-
-
-            <tbody>
-                <?php
-                while ($row = $resultado->fetch_assoc()) {
-                ?>
-                    <tr>
-                        <td><?php echo $row['proprietario'] ?></td>
-                        <td><?php echo $row['placa'] ?></td>
-                        <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'edita-carro.php?id='+<?php echo $row['id'] ?>">Editar</button></td>
-                        <td><button type="button" class="btn btn-outline-danger" onclick="exclude(<?php echo $row['id'] ?>)">Excluir</button></td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
-    <?php
-    }
-    ?>
 </body>
 
 </html>
