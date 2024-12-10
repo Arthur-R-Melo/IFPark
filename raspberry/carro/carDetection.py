@@ -42,7 +42,7 @@ while True:
             confidence = scores[class_id]
 
             # Filtrar apenas carros com confiança > 50%
-            if confidence > 0.5 and classes[class_id] == "car":
+            if confidence > 0.2 and classes[class_id] == "car":
                 center_x = int(detection[0] * width)
                 center_y = int(detection[1] * height)
                 w = int(detection[2] * width)
