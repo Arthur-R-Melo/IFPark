@@ -1,8 +1,11 @@
+from typing import Tuple
+
 from flask import Flask, request, jsonify
 import subprocess
 import os
 import uuid
 import json
+import requests
 
 app = Flask(__name__)
 
@@ -33,6 +36,8 @@ def index():
         if process.returncode != 0:
             raise RuntimeError(f"Erro ao processar a imagem: {process.stderr.strip()}")
 
+        verifyPlates(json.loads(process.stdout.strip()), request.form.get('id'))
+
         return jsonify({"result": process.stdout.strip()}), 200
 
     except Exception as e:
@@ -47,5 +52,12 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
 
-def verifyPlates(result, id):
-    
+def verifyPlates(resultALPR: dict, id: int) -> tuple[bool, int]:
+    try:
+        for result in resultALPR['results']:
+            for candidate in result:
+                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php?placa={candidate['plate']}&id={id}"
+                response = request.get(url)
+                return response['existe'], 200
+    except Exception as e:
+        return False, 400
