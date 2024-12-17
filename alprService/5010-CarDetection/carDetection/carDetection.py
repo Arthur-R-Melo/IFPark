@@ -35,5 +35,4 @@ def identifyCar(image_path):
             # Filtrar apenas carros com confiança > 50%
             if confidence > 0.5 and classes[class_id] == "car":
                 return True
-            else:
-                return False
+    return False

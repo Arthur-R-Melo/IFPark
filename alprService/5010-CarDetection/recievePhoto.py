@@ -16,13 +16,13 @@ def hello_world():
     file = request.files['imagem']
     if file.filename == '':
         return jsonify({"error": "Nenhum arquivo selecionado"}), 400
-    unique_filename = f"{uuid.uuid4()}.jpg"
+    unique_filename = "imagem.jpg"
     filepath = os.path.join(TEMP_FOLFER, unique_filename)
 
     try:
-        file.save("filepath.jpg")
+        file.save(filepath)
 
-        result = identifyCar("filepath.jpg")
+        result = identifyCar(filepath)
 
 
         return jsonify({"result": result}), 200
