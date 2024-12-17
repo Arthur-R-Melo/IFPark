@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import subprocess
 import os
 import uuid
+import json
 
 app = Flask(__name__)
 
@@ -44,3 +45,7 @@ def index():
 # Inicia o servidor
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
+
+def verifyPlates(result, id):
+    
