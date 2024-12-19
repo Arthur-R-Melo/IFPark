@@ -36,7 +36,18 @@
                 <label for="emailInst" class="form-label">Email da instituição</label>
                 <input type="email" name="emailInst" id="emailInst" class="form-control" placeholder="Insira o email da instituição">
             </div>
-            
+            <div class="mb-3">
+                <label for="document" class="form-label">CPF/CNPJ</label>
+                <input type="text" name="document" id="document" class="form-control" placeholder="Insira o documento(CPF/CNPJ)">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Insira a senha</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Insira a senha">
+            </div>
+            <div class="mb-3">
+                <label for="passwordConfirm" class="form-label">Confirme a senha</label>
+                <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control" placeholder="Confirme sua senha">
+            </div>
         </form>
     </div>
 </body>
