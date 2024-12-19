@@ -9,12 +9,14 @@ import requests
 
 app = Flask(__name__)
 
-TEMP_FOLFER =  './temp_images'
-os.makedirs(TEMP_FOLFER, exist_ok=True)
+TEMP_FOLDER = './temp_images'
+os.makedirs(TEMP_FOLDER, exist_ok=True)
+
 
 @app.route('/')
 def teste():
     return "<h1>Teste</h1>"
+
 
 @app.route('/plate-service', methods=['POST'])
 def index():
@@ -25,20 +27,22 @@ def index():
     if file.filename == '':
         return jsonify({"error": "Nenhum arquivo selecionado"}), 400
     unique_filename = f"{uuid.uuid4()}.jpg"
-    filepath = os.path.join(TEMP_FOLFER, unique_filename)
+    filepath = os.path.join(TEMP_FOLDER, unique_filename)
 
     try:
         file.save(filepath)
-
 
         process = subprocess.run(['alpr', '-c', 'br', '-j', filepath], capture_output=True, text=True)
 
         if process.returncode != 0:
             raise RuntimeError(f"Erro ao processar a imagem: {process.stderr.strip()}")
 
-        verifyPlates(json.loads(process.stdout.strip()), request.form.get('id'))
+        response, status = verify_plates(json.loads(process.stdout.strip()), int(request.form.get('id')))
 
-        return jsonify({"result": process.stdout.strip()}), 200
+        if status == 200:
+            return jsonify({"status": True, "result": response}), 200
+        else:
+            return jsonify({"status": False}), status
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -52,12 +56,20 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
 
-def verifyPlates(resultALPR: dict, id: int) -> tuple[bool, int]:
+def verify_plates(resultALPR: dict, id_empresa: int) -> tuple[bool, int]:
     try:
         for result in resultALPR['results']:
             for candidate in result:
-                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php?placa={candidate['plate']}&id={id}"
-                response = request.get(url)
-                return response['existe'], 200
-    except Exception as e:
-        return False, 400
+                params = {
+                    "placa": candidate['plate'],
+                    "id": id_empresa
+                }
+                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php"
+                response = requests.get(url, params=params)
+                if response.status_code == 200:
+                    data = response.json()
+                    return data['existe'], 200
+                else:
+                    return False, response.status_code
+    except Exception:
+        return False, 500
