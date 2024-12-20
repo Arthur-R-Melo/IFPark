@@ -12,6 +12,23 @@ app = Flask(__name__)
 TEMP_FOLDER = './temp_images'
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
+def verify_plates(resultALPR: dict, id_empresa: int) -> tuple[bool, int]:
+    try:
+        for result in resultALPR['results']:
+            for candidate in result:
+                params = {
+                    "placa": candidate['plate'],
+                    "id": id_empresa
+                }
+                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php"
+                response = requests.get(url, params=params)
+                if response.status_code == 200:
+                    data = response.json()
+                    return data['existe'], 200
+                else:
+                    return False, response.status_code
+    except Exception:
+        return False, 500
 
 @app.route('/')
 def teste():
@@ -56,20 +73,4 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
 
-def verify_plates(resultALPR: dict, id_empresa: int) -> tuple[bool, int]:
-    try:
-        for result in resultALPR['results']:
-            for candidate in result:
-                params = {
-                    "placa": candidate['plate'],
-                    "id": id_empresa
-                }
-                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php"
-                response = requests.get(url, params=params)
-                if response.status_code == 200:
-                    data = response.json()
-                    return data['existe'], 200
-                else:
-                    return False, response.status_code
-    except Exception:
-        return False, 500
+
