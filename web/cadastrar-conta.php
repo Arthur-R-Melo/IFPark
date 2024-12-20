@@ -27,7 +27,7 @@
     <div class="container" id="form-container">
         <h1 id="h1-login">Cadastro de Instituição</h1>
         <br>
-        <form action="" onsubmit="return validarFormulario(event)" method="POST">
+        <form action="control/cadastroControl.php" onsubmit="return validarFormulario(event)" method="POST">
             <div class="mb-3">
                 <label for="nomeInst" class="form-label">Nome da Instituição</label>
                 <input type="text" class="form-control" name="nomeInst" id="nomeInst" placeholder="Insira o nome da instituição">
