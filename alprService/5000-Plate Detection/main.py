@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from flask import Flask, request, jsonify
 import subprocess
 import os
@@ -12,23 +10,28 @@ app = Flask(__name__)
 TEMP_FOLDER = './temp_images'
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
-def verify_plates(resultALPR: dict, id_empresa: int) -> tuple[bool, int]:
+def verify_plates(resultALPR: dict, id_empresa: int) -> tuple[bool, int, str]:
     try:
         for result in resultALPR['results']:
-            for candidate in result:
+            for candidate in result["candidates"]:
                 params = {
                     "placa": candidate['plate'],
                     "id": id_empresa
                 }
-                url = f"https://feiratec.dev.br/ifpark/control/consulta-placa.php"
+                url = "https://feiratec.dev.br/ifpark/control/consulta-placa.php"
                 response = requests.get(url, params=params)
                 if response.status_code == 200:
                     data = response.json()
-                    return data['existe'], 200
+                    if data['existe'] == 'false':
+                        continue
+                    else:
+                        return True, 200, "None"
                 else:
-                    return False, response.status_code
-    except Exception:
-        return False, 500
+                    return False, response.status_code, response.text
+
+        return False, 200, "None"
+    except Exception as excpt:
+        return False, 500, str(excpt)
 
 @app.route('/')
 def teste():
@@ -54,12 +57,12 @@ def index():
         if process.returncode != 0:
             raise RuntimeError(f"Erro ao processar a imagem: {process.stderr.strip()}")
 
-        response, status = verify_plates(json.loads(process.stdout.strip()), int(request.form.get('id')))
+        response, status, message = verify_plates(json.loads(process.stdout.strip()), int(request.form.get('id')))
 
         if status == 200:
             return jsonify({"status": True, "result": response}), 200
         else:
-            return jsonify({"status": False}), status
+            return jsonify({"status": False, "message": message}), status
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

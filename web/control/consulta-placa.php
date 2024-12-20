@@ -1,5 +1,5 @@
 <?php
-include('connectionFactory.php');
+include('../connectionFactory.php');
 
 if (isset($_GET['placa']) && isset($_GET['id'])) {
     header('Content-Type: application/json');
