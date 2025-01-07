@@ -7,16 +7,6 @@ if (!(isset($_POST['nomeInst']) && isset($_POST['emailInst']) && isset($_POST['d
         alert("Alguma informação não foi definida!")
         window.history.back();
     </script>
-<?php
-    die();
-}
-
-if (isEmailInDatabase($email)) {
-?>
-    <script>
-        alert("Email já cadastrado");
-        window.history.back();
-    </script>
     <?php
     die();
 }
@@ -28,6 +18,16 @@ try {
     $email = $_POST['emailInst'];
     $documento = $_POST['document'];
     $senha = $_POST['password'];
+
+    if (isEmailInDatabase($email)) {
+    ?>
+        <script>
+            alert("Email já cadastrado");
+            window.history.back();
+        </script>
+    <?php
+        die();
+    }
 
     $hashedPassword = password_hash($senha, PASSWORD_ARGON2I);
 
@@ -58,11 +58,11 @@ try {
     ?>
     <script>
         alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
-        console.log(<?php addslashes($e) ?>)
+        console.log(<?php addslashes($e->getMessage()) ?>)
         // window.history.back();
     </script>
     <?php
-    echo addslashes($e);
+    echo addslashes($e->getMessage());
 }
 
 function isEmailInDatabase($email)
@@ -79,7 +79,7 @@ function isEmailInDatabase($email)
             $stmt->close();
             $conn->close();
             return $result->num_rows > 0;
-        }else {
+        } else {
             return true;
         }
     } catch (Exception $e) {
@@ -90,7 +90,7 @@ function isEmailInDatabase($email)
             // window.history.back();
         </script>
 <?php
-        echo addslashes($e);
+        echo addslashes($e->getMessage());
         return true;
     }
 }
