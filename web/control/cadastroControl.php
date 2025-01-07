@@ -30,7 +30,7 @@ try {
     $documento = $_POST['document'];
     $senha = $_POST['password'];
 
-    $hashedPassword = password_hash($senha, PASSWORD_ARGON2I);
+    $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO Instituicao (nome, email, doc, senha) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
