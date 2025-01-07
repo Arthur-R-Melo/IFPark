@@ -1,5 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+<?php
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == FALSE) {
+    header("Location: login.html");
+    exit();
+}
+
+include('connectionFactory.php');
+$sql = "SELECT * FROM Carro WHERE instituicao = " . $_SESSION['instituicao_ID'];
+$conn = getConnection();
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$resultado = $stmt->get_result();
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +27,7 @@
 <body>
     <header>
         <img src="images/ifpark_logoBranco_TXT.png" alt="IfPark Logo">
+        <?php echo $_SESSION['instituicaoNome'];?>
     </header>
 
     <nav>
