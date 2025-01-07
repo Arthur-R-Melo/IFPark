@@ -49,11 +49,11 @@ $resultado = $stmt->get_result();
                 </div>
                 <div class="mb-3">
                     <label for="cnpj" class="form-label">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder=<?php echo $_SESSION['instituicao_doc'];?>>
+                    <input type="text" class="form-control" id="cnpj" placeholder=<?php echo $_SESSION['documento'];?>>
                 </div>
                 <div class="mb-3">
                     <label for="endereco" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="endereco" placeholder=<?php echo $_SESSION['instituicao_email'];?>>
+                    <input type="text" class="form-control" id="endereco" placeholder=<?php echo $_SESSION['email'];?>>
                 </div>
                 
                 <button type="submit" class="btn btn-success">Salvar</button>
