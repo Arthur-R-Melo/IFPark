@@ -57,7 +57,7 @@ $resultado = $stmt->get_result();
                     <img src="images/pessoaicon.png" alt="Administradores">
                     <h2>Administradores</h2>
                     <p>Ferramentas e áreas exclusivas para os administradores do sistema.</p>
-                    <a href="#" class="btn">Ver Mais</a>
+                    <a href="testeadminpage.php" class="btn">Ver Mais</a>
                 </div>
             </div>
         </main>
