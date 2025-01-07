@@ -4,10 +4,22 @@ include("../connectionFactory.php");
 if (!(isset($_POST['nomeInst']) && isset($_POST['emailInst']) && isset($_POST['document']) && isset($_POST['password']))) {
 ?>
     <script>
-        alert("Alguma informação não foi definida!")
+        alert("Alguma informação não foi definida!");
         window.history.back();
     </script>
-    <?php
+<?php
+    die();
+}
+
+$email = $_POST['emailInst'];
+
+if (isEmailInDatabase($email)) {
+?>
+    <script>
+        alert("Email já cadastrado");
+        window.history.back();
+    </script>
+<?php
     die();
 }
 
@@ -15,25 +27,18 @@ try {
     $conn = getConnection();
 
     $nome = $_POST['nomeInst'];
-    $email = $_POST['emailInst'];
     $documento = $_POST['document'];
     $senha = $_POST['password'];
-
-    if (isEmailInDatabase($email)) {
-    ?>
-        <script>
-            alert("Email já cadastrado");
-            window.history.back();
-        </script>
-    <?php
-        die();
-    }
 
     $hashedPassword = password_hash($senha, PASSWORD_ARGON2I);
 
     $sql = "INSERT INTO Instituicao (nome, email, doc, senha) VALUES (?, ?, ?, ?)";
-
     $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        die("Erro ao preparar statement: " . $conn->error);
+    }
+
     $stmt->bind_param('ssss', $nome, $email, $documento, $hashedPassword);
 
     if ($stmt->execute()) {
@@ -55,14 +60,12 @@ try {
     $stmt->close();
     $conn->close();
 } catch (Exception $e) {
-    ?>
+?>
     <script>
-        alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
-        console.log(<?php addslashes($e->getMessage()) ?>)
-        // window.history.back();
+        alert("Ocorreu uma exceção: <?php echo addslashes($e->getMessage()); ?>");
+        console.log("<?php echo addslashes($e->getMessage()); ?>");
     </script>
-    <?php
-    echo addslashes($e->getMessage());
+<?php
 }
 
 function isEmailInDatabase($email)
@@ -72,25 +75,26 @@ function isEmailInDatabase($email)
         $sql = "SELECT * FROM Instituicao WHERE email = ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $email);
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
 
-            $stmt->close();
-            $conn->close();
-            return $result->num_rows > 0;
-        } else {
-            return true;
+        if (!$stmt) {
+            die("Erro ao preparar statement: " . $conn->error);
         }
+
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $stmt->close();
+        $conn->close();
+
+        return $result->num_rows > 0;
     } catch (Exception $e) {
     ?>
         <script>
-            alert("Ocorreu uma exceção<?php addslashes($e) ?>!!")
-            console.log(<?php addslashes($e) ?>)
-            // window.history.back();
+            alert("Ocorreu uma exceção: <?php echo addslashes($e->getMessage()); ?>");
+            console.log("<?php echo addslashes($e->getMessage()); ?>");
         </script>
 <?php
-        echo addslashes($e->getMessage());
         return true;
     }
 }
