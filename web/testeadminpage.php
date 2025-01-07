@@ -41,7 +41,7 @@ $resultado = $stmt->get_result();
     <main class="container my-5">
         <!-- Seção de dados da empresa -->
         <section class="mb-5">
-            <h2 class="mb-3">*NOME DA EMPRESA*</h2>
+            <h2 class="mb-3"><?php echo $_SESSION['instituicaoNome'];?></h2>
             <form>
                 <div class="mb-3">
                     <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
