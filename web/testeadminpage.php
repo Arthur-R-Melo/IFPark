@@ -27,7 +27,7 @@ $resultado = $stmt->get_result();
 <body>
     <header>
         <img src="images/ifpark_logoBranco_TXT.png" alt="IfPark Logo">
-        <?php echo $_SESSION['instituicaoNome'];?>
+        <?php echo $_SESSION['documento'];?>
     </header>
 
     <nav>

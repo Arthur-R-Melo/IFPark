@@ -77,6 +77,7 @@ try {
             $_SESSION['instituicao_ID'] = $rows['ID'];
             $_SESSION['documento'] = $rows['doc'];
             $_SESSION['instituicaoNome'] = $rows['nome'];
+            $_SESSION['email'] = $rows['email'];
         }
 
 
