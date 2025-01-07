@@ -45,15 +45,15 @@ $resultado = $stmt->get_result();
             <form>
                 <div class="mb-3">
                     <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
-                    <input type="text" class="form-control" id="nomeEmpresa" placeholder="Puxar do banco nome da empresa">
+                    <input type="text" class="form-control" id="nomeEmpresa" placeholder=<?php echo $_SESSION['instituicaoNome'];?>>
                 </div>
                 <div class="mb-3">
                     <label for="cnpj" class="form-label">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="Puxar do banco CNPJ da empresa">
+                    <input type="text" class="form-control" id="cnpj" placeholder=<?php echo $_SESSION['instituicao_doc'];?>>
                 </div>
                 <div class="mb-3">
                     <label for="endereco" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="endereco" placeholder="Puxar do banco email da empresa">
+                    <input type="text" class="form-control" id="endereco" placeholder=<?php echo $_SESSION['instituicao_email'];?>>
                 </div>
                 
                 <button type="submit" class="btn btn-success">Salvar</button>
