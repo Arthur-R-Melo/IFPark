@@ -1,4 +1,5 @@
 import cv2
+import requests
 import numpy as np
 
 def identifyCar(image_path):
@@ -34,5 +35,12 @@ def identifyCar(image_path):
 
             # Filtrar apenas carros com confiança > 50%
             if confidence > 0.5 and classes[class_id] == "car":
+                url = '52.233.90.226:5000/plate-service'
+
+                with open(file_path, 'rb') as file:
+                    files = {'imagem': file}
+                response = requests.post(url, files=files)
+
+                print(response.text)
                 return True
     return False
