@@ -1,7 +1,7 @@
 import requests
 
 def enviarFoto():
-    url = 'http://localhost:5010/carDetection'
+    url = 'http://52.233.90.226:5010/carDetection'
     file_path = 'teste.jpg'
 
     with open(file_path, 'rb') as file:
