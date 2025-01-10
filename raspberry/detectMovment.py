@@ -37,14 +37,14 @@ while True:
     change = np.sum(diff)
     
     # Define um limiar para mudança significativa
-    threshold = 80000  # Ajuste este valor conforme necessário
+    threshold = 100000  # Ajuste este valor conforme necessário
     
     # Verifica se a mudança é significativa
     if change > threshold:
         print("Mudança significativa detectada!")
         color = (0, 0, 255)  # Vermelho em BGR
         cv2.imwrite("frame.jpg", frame)
-        time.sleep(0.2)    
+        time.sleep(0.5)    
     else:
         color = (0, 255, 0)  # Verde em BGR
     
