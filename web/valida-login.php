@@ -63,7 +63,7 @@ try {
         $_SESSION['email'] = $rows['email'];
 
         if ($_POST['administrador'] == 'adm') {
-            $_SESSION['instituicao'] == false;
+            $_SESSION['instituicao'] = false;
             $_SESSION['ID'] = $rows['ID'];
             $_SESSION['instituicao_ID'] = $rows['instituicao'];
             $_SESSION['nivelAcesso'] = $rows['nivelDeAcesso'];
@@ -75,7 +75,7 @@ try {
             $rows = $resultado->fetch_assoc();
             $_SESSION['instituicaoNome'] = $rows['nome'];
         }else {
-            $_SESSION['instituicao'] == true;
+            $_SESSION['instituicao'] = true;
             $_SESSION['instituicao_ID'] = $rows['ID'];
             $_SESSION['documento'] = $rows['doc'];
             $_SESSION['instituicaoNome'] = $rows['nome'];

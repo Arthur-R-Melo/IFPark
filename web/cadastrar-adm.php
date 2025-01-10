@@ -1,5 +1,18 @@
 <?php
 include('connectionFactory.php');
+session_start();
+
+
+if (!isset($_SESSION['instituicao']) || $_SESSION['instituicao'] !== true || !isset($_SESSION['instituicao_ID'])) {
+?>
+    <script>
+        alert("Você precisa estar logado como uma instituição para isso!");
+        window.history.back();
+    </script>
+    <?php
+    die;
+}
+
 
 function isUserInDataBase($user, $idInst)
 {
@@ -22,7 +35,7 @@ function isUserInDataBase($user, $idInst)
 
         return $result->num_rows > 0;
     } catch (Exception $e) {
-?>
+    ?>
         <script>
             alert("Ocorreu uma exceção: <?php echo addslashes($e->getMessage()); ?>");
             console.log("<?php echo addslashes($e->getMessage()); ?>");
@@ -45,8 +58,9 @@ if (isset($_POST['nome'])) {
         die;
     }
 
-    $user = $_POST['user'];
-    $idInst = $_SESSION['instituicao_ID'];
+    $user = htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8');
+    $idInst = intval($_SESSION['instituicao_ID']);             // Converte para inteiro
+
 
     if (isUserInDataBase($user, $idInst)) {
     ?>
@@ -61,25 +75,25 @@ if (isset($_POST['nome'])) {
     try {
         $conn = getConnection();
 
-        $nome = $_POST['nome'];
+        $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');;
         $senha = $_POST['senha'];
 
         $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO Administrador (instituicao, user, senha, nome) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO Administrador (instituicao, user, senha, nome, nivelDeAcesso) VALUES (?, ?, ?, ?, 1)";
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
             die("Erro ao preparar statement: " . $conn->error);
         }
 
-        $stmt->bind_param("isss", $idInst, $user, $senha, $nome);
+        $stmt->bind_param("isss", $idInst, $user, $hashedPassword, $nome);
 
         if ($stmt->execute()) {
         ?>
             <script>
                 alert("Cadastro realizado com sucesso!");
-                window.location.href = "../login.html";
+                window.location.href = "logedin.php";
             </script>
         <?php
         } else {
@@ -99,18 +113,11 @@ if (isset($_POST['nome'])) {
             alert("Ocorreu uma exceção: <?php echo addslashes($e->getMessage()); ?>");
             console.log("<?php echo addslashes($e->getMessage()); ?>");
         </script>
-    <?php
+<?php
     }
 }
 
-if (!(isset($_SESSION['instituicao']) && $_SESSION['instituicao'] === true)) {
-    ?>
-    <script>
-        alert("Você precisa estar logado como uma instituição para isso!");
-        window.history.back();
-    </script>
-<?php
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -169,6 +176,11 @@ if (!(isset($_SESSION['instituicao']) && $_SESSION['instituicao'] === true)) {
                 <div class="invalid-feedback" id="erroConfirmaSenha">
                     As senhas devem coincidir!
                 </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <input type="submit" value="Cadastrar" class="btn btn-success">
+                <input type="reset" value="Limpar" class="btn btn-warning">
             </div>
         </form>
     </div>
