@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+from upload import enviarFoto
 
 # Define as coordenadas do quadrado (x, y, largura, altura)
 square_x = 100
@@ -42,6 +43,7 @@ while True:
     if change > threshold:
         print("Mudança significativa detectada!")
         color = (0, 0, 255)  # Vermelho em BGR
+        cv2.imwrite("frame.jpg", frame)
         time.sleep(0.2)    
     else:
         color = (0, 255, 0)  # Verde em BGR
