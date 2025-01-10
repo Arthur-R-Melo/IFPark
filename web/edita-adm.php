@@ -45,38 +45,47 @@ if ($row['instituicao'] !== $instiID) {
 }
 
 if (isset($_POST['nome'])) {
-    $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
-    $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
-    $user = htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8');
+    try {
+        $conn = getConnection();
+        $id = intval($_GET['id']);
+        $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+        $user = htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8');
 
-    $sqlUpdate = "UPDATE Adminstrador SET user = ?, nome = ?, email = ? WHERE id = ?";
+        $sqlUpdate = "UPDATE Administrador SET user = '$user', nome = '$nome', email = '$email' WHERE id = " . $id;
 
-    $stmtUpdate = $conn->prepare($sqlUpdate);
-    $stmtUpdate->bind_param("sssi", $user, $nome, $email, $id);
-
-    if ($stmtUpdate->execute()) {
+        if ($conn->query($sqlUpdate)) {
     ?>
+            <script>
+                alert("Registro atualizado com sucesso!");
+                window.history.back();
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                alert("Erro ao atualizar registro!");
+                window.history.back();
+            </script>
+        <?php
+        }
+
+        $stmtUpdate->close();
+        $stmtCheck->close();
+        $conn->close();
+        ?>
         <script>
-            alert("Registro atualizado com sucesso!");
+            window.history.back();
         </script>
     <?php
-    } else {
+        die;
+    } catch (Exception $e) {
     ?>
         <script>
-            alert("Erro ao atualizar registro!");
+            alert(<?php echo addslashes($e->getMessage()) ?>)
         </script>
-    <?php
-    }
-
-    $stmtUpdate->close();
-    $stmtCheck->close();
-    $conn->close();
-    ?>
-    <script>
-        window.history.back();
-    </script>
 <?php
-    die;
+    }
 }
 
 
@@ -114,7 +123,7 @@ if (isset($_POST['nome'])) {
     <div class="container" id="form-container">
         <h1 id="h1-login">Edição de Administrador</h1>
         <br>
-        <form action="edita-adm.php?id<?php echo $id ?>" onsubmit="return validateForm()" method="POST">
+        <form action="edita-adm.php?id=<?php echo $id ?>" onsubmit="return validateForm()" method="POST">
             <div class="mb-3 mt-3">
                 <label for="nome" class="form-label">Nome do administrador</label>
                 <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $row['nome'] ?>">
