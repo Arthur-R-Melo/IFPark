@@ -96,7 +96,7 @@ $resultado = $stmt->get_result();
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-success">Adicionar Funcionário</button>
+            <button class="btn btn-success" onclick="window.location.href = 'cadastrar-adm.php'">Adicionar Funcionário</button>
         </section>
     </main>
 

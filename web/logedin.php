@@ -34,6 +34,7 @@ $resultado = $stmt->get_result();
             <li><a href="index.html">INÍCIO</a></li>
             <li><a href="contato.html">CONTATO</a></li>
             <li><a href="cadastroCarro.html">CADASTRAR NOVO CARRO</a></li>
+            <li><a href="control/logout.php">SAIR</a></li>
         </ul>
     </nav>
 
