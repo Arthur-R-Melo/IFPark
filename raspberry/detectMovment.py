@@ -44,6 +44,7 @@ while True:
         print("Mudança significativa detectada!")
         color = (0, 0, 255)  # Vermelho em BGR
         cv2.imwrite("frame.jpg", frame)
+        enviarFoto()
         time.sleep(0.5)    
     else:
         color = (0, 255, 0)  # Verde em BGR

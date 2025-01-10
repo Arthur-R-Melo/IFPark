@@ -22,7 +22,7 @@ def index():
     try:
         file.save(filepath)
 
-        response = identifyCar(filepath)
+        response = identifyCar(filepath,request.form.get('id'))
 
         if 'errror' in response:
             print(response['error'])

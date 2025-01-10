@@ -4,7 +4,7 @@ import requests
 import json
 import numpy as np
 
-def identifyCar(image_path):
+def identifyCar(image_path,id):
     print(image_path)
     # Carregar a rede YOLO
     net = cv2.dnn.readNet("carDetection/yolov3-tiny.weights", "carDetection/yolov3-tiny.cfg")
@@ -45,16 +45,18 @@ def identifyCar(image_path):
 
                 with open(image_path, 'rb') as file:
                     files = {'imagem': file}
-                    response = requests.post(url, files=files)
-                
+                    data = {'id' : id}
+                    response = requests.post(url, files=files, data=data)
+                print(response.text)
                 if response.status_code == 200:
-                    response.json()
+                    response = response.json()
 
                     if 'error' in response:
                         print(response['error'])
                         return jsonify({"status": False}) #TODO
                     else:
                         validPlaca = response['result']
+                        return {"status": True, "carro": temCarro, "placa": validPlaca};
                 
             
     return {"status": True, "carro": temCarro, "placa": validPlaca}
