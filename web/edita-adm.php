@@ -15,14 +15,14 @@ if (!isset($_SESSION['instituicao']) || $_SESSION['instituicao'] !== true || !is
 $instiID = $_SESSION['instituicao_ID'];
 $conn = getConnection();
 $id = intval($_GET['id']);
-$sql = "SELECT * FROM Administrador WHERE id = ?";
+$sqlCheck = "SELECT * FROM Administrador WHERE id = ?";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $id);
-$stmt->execute();
-$result = $stmt->get_result();
+$stmtCheck = $conn->prepare($sqlCheck);
+$stmtCheck->bind_param('i', $id);
+$stmtCheck->execute();
+$resultCheck = $stmtCheck->get_result();
 
-if ($result->num_rows <= 0) {
+if ($resultCheck->num_rows <= 0) {
 ?>
     <script>
         alert("Administrador não encontrado!");
@@ -32,7 +32,7 @@ if ($result->num_rows <= 0) {
     exit;
 }
 
-$row = $result->fetch_assoc();
+$row = $resultCheck->fetch_assoc();
 
 if ($row['instituicao'] !== $instiID) {
 ?>
@@ -40,10 +40,57 @@ if ($row['instituicao'] !== $instiID) {
         alert("Você não tem permissão para editar esse registro!");
         window.history.back();
     </script>
-<?php
+    <?php
     exit;
 }
+
+if (isset($_POST['nome'])) {
+    try {
+        $conn = getConnection();
+        $id = intval($_GET['id']);
+        $nome = htmlspecialchars($_POST['nome'], ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+        $user = htmlspecialchars($_POST['user'], ENT_QUOTES, 'UTF-8');
+
+        $sqlUpdate = "UPDATE Administrador SET user = '$user', nome = '$nome', email = '$email' WHERE id = " . $id;
+
+        if ($conn->query($sqlUpdate)) {
+    ?>
+            <script>
+                alert("Registro atualizado com sucesso!");
+                window.history.back();
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                alert("Erro ao atualizar registro!");
+                window.history.back();
+            </script>
+        <?php
+        }
+
+        $stmtUpdate->close();
+        $stmtCheck->close();
+        $conn->close();
+        ?>
+        <script>
+            window.history.back();
+        </script>
+    <?php
+        die;
+    } catch (Exception $e) {
+    ?>
+        <script>
+            alert(<?php echo addslashes($e->getMessage()) ?>)
+        </script>
+<?php
+    }
+}
+
+
 ?>
+
 
 
 
@@ -71,29 +118,77 @@ if ($row['instituicao'] !== $instiID) {
             <li><a href="contato.html">CONTATO</a></li>
         </ul>
 
-        <div class="container" id="form-container">
-            <h1 id="h1-login">Edição de Administrador</h1>
-            <br>
-            <form action="" onclick="" method="POST">
-                <div class="mb-3 mt-3">
-                    <label for="nome" class="form-label">Nome do administrador</label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $row['nome']?>">
-                </div>
-
-                <div class="mb-3 mt-3">
-
-                </div>
-
-                <div class="mb-3 mt-3">
-
-                </div>
-
-                <div class="mb-3 mt-3">
-
-                </div>
-            </form>
-        </div>
     </nav>
+
+    <div class="container" id="form-container">
+        <h1 id="h1-login">Edição de Administrador</h1>
+        <br>
+        <form action="edita-adm.php?id=<?php echo $id ?>" onsubmit="return validateForm()" method="POST">
+            <div class="mb-3 mt-3">
+                <label for="nome" class="form-label">Nome do administrador</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $row['nome'] ?>">
+                <div id="error-nome" style="color: red; display: none;">Por favor, preencha este campo.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="user" class="form-label">Nome de usuário</label>
+                <input type="text" class="form-control" id="user" name="user" value="<?php echo $row['user'] ?>">
+                <div id="error-user" style="color: red; display: none;">Por favor, preencha este campo.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email do usuário</label>
+                <input type="text" class="form-control" id="email" name="email" value="<?php echo $row['email'] ?>">
+                <div id="error-email" style="color: red; display: none;">Por favor, insira um email válido.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
 </body>
 
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Validação do campo Nome
+        const nome = document.getElementById("nome").value.trim();
+        const errorNome = document.getElementById("error-nome");
+        if (nome === "") {
+            errorNome.style.display = "block";
+            isValid = false;
+        } else {
+            errorNome.style.display = "none";
+        }
+
+        // Validação do campo Usuário
+        const user = document.getElementById("user").value.trim();
+        const errorUser = document.getElementById("error-user");
+        if (user === "") {
+            errorUser.style.display = "block";
+            isValid = false;
+        } else {
+            errorUser.style.display = "none";
+        }
+
+        // Validação do campo Email (não obrigatório, mas deve ser válido se preenchido)
+        const email = document.getElementById("email").value.trim();
+        const errorEmail = document.getElementById("error-email");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email !== "" && !emailRegex.test(email)) {
+            errorEmail.style.display = "block";
+            isValid = false;
+        } else {
+            errorEmail.style.display = "none";
+        }
+
+        return isValid;
+    }
+</script>
+
 </html>
+
+<?php
+$stmtCheck->close();
+$conn->close();
+?>
