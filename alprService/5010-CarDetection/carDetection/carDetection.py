@@ -7,18 +7,18 @@ import numpy as np
 def identifyCar(image_path):
     print(image_path)
     # Carregar a rede YOLO
-    net = cv2.dnn.readNet("yolov3-tiny.weights", "yolov3-tiny.cfg")
+    net = cv2.dnn.readNet("carDetection/yolov3-tiny.weights", "carDetection/yolov3-tiny.cfg")
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
     classes = []
-    with open("coco.names", "r") as f:
+    with open("carDetection/coco.names", "r") as f:
         classes = f.read().strip().split("\n")
 
     # Carregar a imagem
     image = cv2.imread(image_path)
 
     if image is None:
-        print("Erro ao carregar a imagem")
+        print("Erro ao carregar a imageme")
         exit()
 
     height, width, channels = image.shape
@@ -28,6 +28,9 @@ def identifyCar(image_path):
     net.setInput(blob)
     outs = net.forward(output_layers)
 
+    temCarro = False
+    validPlaca = False
+    
     # Analisar as detecções
     for out in outs:
         for detection in out:
@@ -35,24 +38,23 @@ def identifyCar(image_path):
             class_id = np.argmax(scores)
             confidence = scores[class_id]
 
-            temCarro = False
-            validPlaca = False
             # Filtrar apenas carros com confiança > 50%
-            if confidence > 0.4 and classes[class_id] == "car":
+            if confidence > 0.3 and classes[class_id] == "car":
                 temCarro = True
-                url = '52.233.90.226:5000/plate-service'
+                url = 'http://52.233.90.226:5000/plate-service'
 
                 with open(image_path, 'rb') as file:
                     files = {'imagem': file}
-                response = requests.post(url, files=files)
-
+                    response = requests.post(url, files=files)
+                
                 if response.status_code == 200:
                     response.json()
 
-                    if 'errror' in response:
+                    if 'error' in response:
+                        print(response['error'])
                         return jsonify({"status": False}) #TODO
                     else:
                         validPlaca = response['result']
                 
             
-    return jsonify({"status": True, "carro": temCarro, "placa": validPlaca})
+    return {"status": True, "carro": temCarro, "placa": validPlaca}
