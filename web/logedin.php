@@ -45,7 +45,7 @@ $resultado = $stmt->get_result();
                 <div class="cardbox">
                     <img src="images/empresaicon.png" alt="Informações da Empresa">
                     <h2>Informações da Empresa</h2>
-                    <p>Conheça mais sobre nossa missão, visão e valores, além de nossas operações.</p>
+                    <p>Gerencie as informações da sua empresa e escolha seu plano de serviço.</p>
                     <a href="#" class="btn">Saiba Mais</a>
                 </div>
                 <div class="cardbox">
@@ -57,7 +57,7 @@ $resultado = $stmt->get_result();
                 <div class="cardbox">
                     <img src="images/pessoaicon.png" alt="Administradores">
                     <h2>Administradores</h2>
-                    <p>Ferramentas e áreas exclusivas para os administradores do sistema.</p>
+                    <p>Gerencie os administradores de forma simples e rápida.</p>
                     <a href="testeadminpage.php" class="btn">Ver Mais</a>
                 </div>
             </div>
