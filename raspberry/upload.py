@@ -11,3 +11,4 @@ def enviarFoto():
         response = requests.post(url, files=files, data=data)
 
     print(response.text)
+    return response
