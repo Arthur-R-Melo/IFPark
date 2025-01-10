@@ -84,8 +84,8 @@ $resultado = $stmt->get_result();
                             <td><?php echo $row['user'] ?></td>
                             <td><?php echo $row['email'] ?></td>
                             <td>
-                                <button type="button" class="btn btn-secundary">Editar</button>
-                                <button type="button" class="btn btn-outline-danger">Excluir</button>
+                                <button type="button" class="btn btn-warning" onclick="window.location.href = 'edita-adm.php?id=<?php echo $row['ID']?>'">Editar</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'control/excluir-adm'">Excluir</button>
                             </td>
                         </tr>
                     <?php
