@@ -1,6 +1,16 @@
 <?php
 include_once "../connectionFactory.php";
 
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+?>
+    <script>
+        alert("Você precisa estar logado para isso!");
+        window.history.back();
+    </script>
+<?php
+    die;
+}
+
 if (isset($_GET['idCarro'])) {
     $id = $_GET['idCarro'];
     $conn = getConnection();
@@ -26,7 +36,7 @@ if (isset($_GET['idCarro'])) {
     ?>
     
     <script>
-    alert("Aqui")
+    alert("ID do carro não informado!")
     window.history.back()</script>
     <?php
 }
