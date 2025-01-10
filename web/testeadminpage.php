@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == FALSE) {
 }
 
 include('connectionFactory.php');
-$sql = "SELECT * FROM Carro WHERE instituicao = " . $_SESSION['instituicao_ID'];
+$sql = "SELECT * FROM Administrador WHERE instituicao = " . $_SESSION['instituicao_ID'];
 $conn = getConnection();
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -22,12 +22,13 @@ $resultado = $stmt->get_result();
     <title>Consulta Carros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">    
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <img src="images/ifpark_logoBranco_TXT.png" alt="IfPark Logo">
-        <?php echo $_SESSION['documento'];?>
+        <?php echo $_SESSION['documento']; ?>
     </header>
 
     <nav>
@@ -41,21 +42,21 @@ $resultado = $stmt->get_result();
     <main class="container my-5">
         <!-- Seção de dados da empresa -->
         <section class="mb-5">
-            <h2 class="mb-3"><?php echo $_SESSION['instituicaoNome'];?></h2>
+            <h2 class="mb-3"><?php echo $_SESSION['instituicaoNome']; ?></h2>
             <form>
                 <div class="mb-3">
                     <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
-                    <input type="text" class="form-control" id="nomeEmpresa" placeholder=<?php echo $_SESSION['instituicaoNome'];?>>
+                    <input type="text" class="form-control" id="nomeEmpresa" placeholder=<?php echo $_SESSION['instituicaoNome']; ?>>
                 </div>
                 <div class="mb-3">
                     <label for="cnpj" class="form-label">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder=<?php echo $_SESSION['documento'];?>>
+                    <input type="text" class="form-control" id="cnpj" placeholder=<?php echo $_SESSION['documento']; ?>>
                 </div>
                 <div class="mb-3">
                     <label for="endereco" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="endereco" placeholder=<?php echo $_SESSION['email'];?>>
+                    <input type="text" class="form-control" id="endereco" placeholder=<?php echo $_SESSION['email']; ?>>
                 </div>
-                
+
                 <button type="submit" class="btn btn-success">Salvar</button>
             </form>
         </section>
@@ -68,32 +69,28 @@ $resultado = $stmt->get_result();
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
-                        <th>Cargo</th>
+                        <th>Usuario</th>
                         <th>Email</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>João Silva</td>
-                        <td>Gerente</td>
-                        <td>joao.silva@empresa.com</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Maria Oliveira</td>
-                        <td>Assistente</td>
-                        <td>maria.oliveira@empresa.com</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
-                        </td>
-                    </tr>
+                    <?php
+                    while ($row = $resultado->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?php echo $row['ID'] ?></td>
+                            <td><?php echo $row['nome'] ?></td>
+                            <td><?php echo $row['user'] ?></td>
+                            <td><?php echo $row['email'] ?></td>
+                            <td>
+                                <button type="button" class="btn btn-secundary">Editar</button>
+                                <button type="button" class="btn btn-outline-danger">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
                 </tbody>
             </table>
             <button class="btn btn-success" onclick="window.location.href = 'cadastrar-adm.php'">Adicionar Funcionário</button>
@@ -104,8 +101,10 @@ $resultado = $stmt->get_result();
         <p>&copy; 2025 IfPark. Todos os direitos reservados.</p>
     </footer>
 </body>
+
 </html>
-   
-    
+
+
 </body>
+
 </html>
