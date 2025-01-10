@@ -1,5 +1,7 @@
 import cv2
+from flask import jsonify
 import requests
+import json
 import numpy as np
 
 def identifyCar(image_path):
@@ -33,14 +35,24 @@ def identifyCar(image_path):
             class_id = np.argmax(scores)
             confidence = scores[class_id]
 
+            temCarro = False
+            validPlaca = False
             # Filtrar apenas carros com confiança > 50%
-            if confidence > 0.5 and classes[class_id] == "car":
+            if confidence > 0.4 and classes[class_id] == "car":
+                temCarro = True
                 url = '52.233.90.226:5000/plate-service'
 
-                with open(file_path, 'rb') as file:
+                with open(image_path, 'rb') as file:
                     files = {'imagem': file}
                 response = requests.post(url, files=files)
 
-                print(response.text)
-                return True
-    return False
+                if response.status_code == 200:
+                    response.json()
+
+                    if 'errror' in response:
+                        return jsonify({"status": False}) #TODO
+                    else:
+                        validPlaca = response['result']
+                
+            
+    return jsonify({"status": True, "carro": temCarro, "placa": validPlaca})
