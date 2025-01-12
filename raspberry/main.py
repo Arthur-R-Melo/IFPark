@@ -50,7 +50,6 @@ def detectMovment():
             cv2.imwrite("frame.jpg", frame)
             response = enviarFoto()
             controlaPortao(response)
-            time.sleep(0.5)    
         else:
             color = (0, 255, 0)  # Verde em BGR
         
@@ -86,6 +85,7 @@ def controlaPortao(jaison):
             statusPortao = False
         else:
             print("nada")
+        time.sleep(5)
 
 detectMovment()
 
