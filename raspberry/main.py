@@ -85,7 +85,7 @@ def controlaPortao(jaison):
             statusPortao = False
         else:
             print("nada")
-        time.sleep(5)
+        time.sleep(0)
 
 detectMovment()
 
