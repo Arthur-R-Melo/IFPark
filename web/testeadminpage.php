@@ -28,12 +28,11 @@ $resultado = $stmt->get_result();
 <body>
     <header>
         <img src="images/ifpark_logoBranco_TXT.png" alt="IfPark Logo">
-        <?php echo $_SESSION['documento']; ?>
     </header>
 
     <nav>
         <ul>
-            <li><a href="index.html">INÍCIO</a></li>
+            <li><a href="logedin.php">INÍCIO</a></li>
             <li><a href="contato.html">CONTATO</a></li>
             <li><a href="cadastroCarro.html">CADASTRAR NOVO CARRO</a></li>
         </ul>
@@ -41,7 +40,7 @@ $resultado = $stmt->get_result();
 
     <main class="container my-5">
         <!-- Seção de dados da empresa -->
-        <section class="mb-5">
+        <!-- <section class="mb-5">
             <h2 class="mb-3"><?php echo $_SESSION['instituicaoNome']; ?></h2>
             <form>
                 <div class="mb-3">
@@ -60,6 +59,7 @@ $resultado = $stmt->get_result();
                 <button type="submit" class="btn btn-success">Salvar</button>
             </form>
         </section>
+-->
 
         <!-- Seção de funcionários -->
         <section>
@@ -84,8 +84,8 @@ $resultado = $stmt->get_result();
                             <td><?php echo $row['user'] ?></td>
                             <td><?php echo $row['email'] ?></td>
                             <td>
-                                <button type="button" class="btn btn-warning" onclick="window.location.href = 'edita-adm.php?id=<?php echo $row['ID']?>'">Editar</button>
-                                <button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'control/excluir-adm?id=<?php echo $row['ID']?>'">Excluir</button>
+                                <button type="button" class="btn btn-warning" onclick="window.location.href = 'edita-adm.php?id=<?php echo $row['ID'] ?>'">Editar</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'control/excluir-adm?id=<?php echo $row['ID'] ?>'">Excluir</button>
                             </td>
                         </tr>
                     <?php
