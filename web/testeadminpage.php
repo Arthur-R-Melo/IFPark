@@ -39,8 +39,9 @@ $resultado = $stmt->get_result();
     </nav>
 
     <main class="container my-5">
+        <?php /*
         <!-- Seção de dados da empresa -->
-        <!-- <section class="mb-5">
+        <section class="mb-5">
             <h2 class="mb-3"><?php echo $_SESSION['instituicaoNome']; ?></h2>
             <form>
                 <div class="mb-3">
@@ -59,7 +60,8 @@ $resultado = $stmt->get_result();
                 <button type="submit" class="btn btn-success">Salvar</button>
             </form>
         </section>
--->
+        */
+        ?>
 
         <!-- Seção de funcionários -->
         <section>
