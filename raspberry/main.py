@@ -13,8 +13,12 @@ def detectMovment():
     square_width = 100
     square_height = 100
 
-    # Inicializa a captura de vídeo (0 para a câmera padrão)
-    cap = cv2.VideoCapture(0)
+    # Inicializa a captura de v�deo com libcamera via GStreamer
+    pipeline = (
+    "libcamerasrc ! video/x-raw, width=640, height=480, framerate=30/1 ! "
+    "videoconvert ! appsink"
+    )
+    cap = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
 
     # Lê o primeiro frame
     ret, prev_frame = cap.read()
