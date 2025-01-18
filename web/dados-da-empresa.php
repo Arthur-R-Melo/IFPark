@@ -62,39 +62,49 @@ $row = $result->fetch_assoc();
         </ul>
     </nav>
 
+    <br><br>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <form action="" onsubmit="return validarFormulario(event)" method="post">
-                    <div class="mb-3 mt-3">
-                        <label for="nome" class="form-label">Nome da instituição</label>
-                        <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $row['nome'] ?>">
-                        <div id="error-nome" style="color: red; display: none;">Por favor, preencha este campo.</div>
-                    </div>
+            <!-- Coluna Esquerda com o Formulário -->
+            <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                <div style="width: 80%; max-width: 600px;"> <!-- Ajusta a largura do formulário -->
+                    <h1 id="h1-login" class="mb-4 text-center">Informações da empresa</h1>
 
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">Email da Instituição</label>
-                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $row['email'] ?>">
-                        <div id="error-email" style="color: red; display: none;">Por favor, insira um email válido.</div>
-                    </div>
+                    <form action="control/atualiza-empresa.php" onsubmit="return validarFormulario(event)" method="post">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome da instituição</label>
+                            <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $row['nome'] ?>">
+                            <div id="error-nome" style="color: red; display: none;">Por favor, preencha este campo.</div>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="documento" class="form-label">Documento</label>
-                        <input type="documento" class="form-control" id="documento" placeholder=<?php echo $row['doc']; ?>>
-                        <div id="error-documento" style="color: red; display: none;">Por favor, insisra um documento em formato válido contendo apenas números</div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email da Instituição</label>
+                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $row['email'] ?>">
+                            <div id="error-email" style="color: red; display: none;">Por favor, insira um email válido.</div>
+                        </div>
 
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <input type="submit" value="Cadastrar" class="btn btn-success">
-                        <input type="reset" value="Limpar" class="btn btn-warning">
-                    </div>
-                </form>
+                        <div class="mb-3">
+                            <label for="documento" class="form-label">Documento</label>
+                            <input type="text" class="form-control" id="documento" value="<?php echo $row['doc']; ?>">
+                            <div id="error-documento" style="color: red; display: none;">Por favor, insira um documento em formato válido contendo apenas números</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <input type="submit" value="Salvar" class="btn btn-success">
+                            <input type="reset" value="Limpar" class="btn btn-warning">
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <!-- Coluna Direita para Conteúdo Adicional -->
             <div class="col-6 d-flex justify-content-center align-items-center">
-                <h1>Direita</h1>
+                <h1>Conteúdo Adicional</h1>
             </div>
         </div>
     </div>
+
 </body>
 
 <script>

@@ -46,7 +46,7 @@ $resultado = $stmt->get_result();
                     <img src="images/empresaicon.png" alt="Informações da Empresa">
                     <h2>Informações da Empresa</h2>
                     <p>Gerencie as informações da sua empresa e escolha seu plano de serviço.</p>
-                    <a href="#" class="btn">Saiba Mais</a>
+                    <a href="dados-da-empresa.php" class="btn">Saiba Mais</a>
                 </div>
                 <div class="cardbox">
                     <img src="images/carroicon.png" alt="Controle de Veículos">
