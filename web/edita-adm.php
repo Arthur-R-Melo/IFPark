@@ -116,6 +116,7 @@ if (isset($_POST['nome'])) {
         <ul>
             <li><a href="logedin.php">INÍCIO</a></li>
             <li><a href="contato.html">CONTATO</a></li>
+            <li><a onclick="window.history.back()" style="color: white;">VOLTAR</a></li>
         </ul>
 
     </nav>

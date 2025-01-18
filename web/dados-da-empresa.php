@@ -67,7 +67,7 @@ $row = $result->fetch_assoc();
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                <div style="width: 80%; max-width: 600px;"> <!-- Ajusta a largura do formulário -->
+                <div style="width: 80%; max-width: 600px;">
                     <h1 id="h1-login" class="mb-4 text-center">Informações da empresa</h1>
 
                     <form action="control/atualiza-empresa.php" onsubmit="return validarFormulario(event)" method="post">
