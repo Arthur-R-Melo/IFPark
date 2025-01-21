@@ -82,14 +82,7 @@ try {
             $_SESSION['email'] = $rows['email'];
         }
 
-
-    ?>
-        <script>
-            alert("Funcionou")
-            console.log("Funcionou")
-        </script>
-    <?php
-    header("Location: logedin.php");
+    header("Location: ../logedin.php");
     exit;
 
     } else { //Caso verdadeiro o código volta a página ou morre depois do else

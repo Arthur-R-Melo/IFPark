@@ -9,7 +9,7 @@ try {
     }
 
     // Defina as credenciais do banco de dados
-    include('../connectionFactory.php');
+    include('connectionFactory.php');
     $conn = getConnection();
     // Processa o formulário quando enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

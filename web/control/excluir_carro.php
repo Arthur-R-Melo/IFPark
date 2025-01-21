@@ -1,5 +1,5 @@
 <?php
-include_once "../connectionFactory.php";
+include_once "connectionFactory.php";
 session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !isset($_SESSION['instituicao_ID'])) {

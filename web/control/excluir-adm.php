@@ -1,5 +1,5 @@
 <?php
-include_once "../connectionFactory.php";
+include_once "connectionFactory.php";
 session_start();
 
 if (!isset($_GET['idAdm'])) {

@@ -1,5 +1,5 @@
 <?php
-include_once "connectionFactory.php";
+include_once "control/connectionFactory.php";
 session_start();
 //Exibir os dados da empresa apenas, a atualização desses dados (tanto no bd quanto na sessão) deve ser responsabilidade de outro arquivo
 

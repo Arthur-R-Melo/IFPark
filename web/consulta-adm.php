@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == FALSE) {
     exit();
 }
 
-include('connectionFactory.php');
+include('control/connectionFactory.php');
 $sql = "SELECT * FROM Administrador WHERE instituicao = " . $_SESSION['instituicao_ID'];
 $conn = getConnection();
 $stmt = $conn->prepare($sql);

@@ -1,5 +1,5 @@
 <?php
-include_once "connectionFactory.php";
+include_once "control/connectionFactory.php";
 $conn = getConnection();
 if (isset($_POST['placa'])) {
     $placa = $_POST['placa'];

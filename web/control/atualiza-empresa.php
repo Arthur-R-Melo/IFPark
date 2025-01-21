@@ -1,5 +1,5 @@
 <?php
-include('../connectionFactory.php');
+include('connectionFactory.php');
 session_start();
 
 try {

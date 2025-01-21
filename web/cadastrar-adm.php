@@ -1,5 +1,5 @@
 <?php
-include('connectionFactory.php');
+include('control/connectionFactory.php');
 session_start();
 
 

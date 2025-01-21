@@ -1,5 +1,5 @@
 <?php
-include_once "connectionFactory.php";
+include_once "control/connectionFactory.php";
 session_start();
 
 if (!isset($_SESSION['instituicao']) || $_SESSION['instituicao'] !== true || !isset($_SESSION['instituicao_ID'])) {

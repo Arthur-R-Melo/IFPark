@@ -1,5 +1,5 @@
 <?php
-include("../connectionFactory.php");
+include("connectionFactory.php");
 
 if (!(isset($_POST['nomeInst']) && isset($_POST['emailInst']) && isset($_POST['document']) && isset($_POST['password']))) {
 ?>
