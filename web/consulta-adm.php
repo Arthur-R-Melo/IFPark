@@ -87,7 +87,7 @@ $resultado = $stmt->get_result();
                             <td><?php echo $row['email'] ?></td>
                             <td>
                                 <button type="button" class="btn btn-warning" onclick="window.location.href = 'edita-adm.php?id=<?php echo $row['ID'] ?>'">Editar</button>
-                                <button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'control/excluir-adm?id=<?php echo $row['ID'] ?>'">Excluir</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'control/excluir-adm.phpid=<?php echo $row['ID'] ?>'">Excluir</button>
                             </td>
                         </tr>
                     <?php
