@@ -129,7 +129,13 @@ footer {
     display: block; /* Garante que a imagem não cause problemas */
 }
 
-
+.bem-vindo-box {
+    border: 2px solid #3a9449; /* Cor azul do Bootstrap */
+    border-radius: 15px; /* Bordas arredondadas */
+    padding: 30px;
+    max-width: 800px;
+    margin: 50px auto;
+}
 
 /*login*/
 #h1-login {

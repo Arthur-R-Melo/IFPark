@@ -20,59 +20,69 @@
         <ul>
             <li><a href="">INÍCIO</a></li>
             <li><a href="contato.html">CONTATO</a></li>
-            <li><a href="login.html">LOGIN</a></li>
         </ul>
     </nav>
-
     <main class="container mt-5">
+        <section class="mb-5" id="bemVindo">
+            <div class="text-white text-center py-5 bem-vindo-box" style="background-color: #3a9449">
+                <div class="container">
+                    <h1 class="display-4 text-white">Bem-vindo ao IFPark</h1>
+                    <p class="lead">A solução inteligente para o controle de acesso de veículos em sua instituição</p>
+                    <div class="mt-4">
+                        <a href="login.html" class="btn btn-light btn-lg me-2">Entrar</a>
+                        <a href="cadastrar-conta.php" class="btn btn-outline-light btn-lg">Registrar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-4">Por que escolher o IFPark?</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Reconhecimento Automático</h5>
+                                <p class="card-text">Sistema baseado em câmera para identificar e controlar o acesso de
+                                    veículos automaticamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Segurança Inteligente</h5>
+                                <p class="card-text">Prevenção contra fechamento de portões sobre veículos com sensores
+                                    de segurança.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestão na Nuvem</h5>
+                                <p class="card-text">Gerencie sua instituição em qualquer lugar com nossa solução
+                                    baseada em nuvem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br><br>
         <section id="sobre-projeto" class="mb-5">
             <h1 class="text-center">Sobre o Projeto</h1>
             <div class="row align-items-center mt-4">
                 <div class="col-md-4 text-center">
-                    <img src="images/raspberry-logo.png" alt="Raspberry Pi Logo" class="img-fluid" width="200px">
+                    <img src="images/raspberry-logo.png" alt="Raspberry Pi Logo" class="img-fluid" width="180px">
                 </div>
                 <div class="col-md-8">
-                    <p class="texto">O IFPark é um sistema inovador de reconhecimento de veículos que utiliza uma câmera
+                    <p class="texto" style="text-align: justify;">O IFPark é um sistema inovador de reconhecimento de
+                        veículos que utiliza uma câmera
                         e tecnologia de leitura de placas para automatizar a abertura e fechamento de portões em
                         estacionamentos. Nosso objetivo é aumentar a segurança e eficiência no controle de acesso a
                         veículos, garantindo que o portão não se feche enquanto um carro estiver passando.</p>
                 </div>
-            </div>
-        </section>
-        <section id="tecnologia">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <!-- Primeiro Card -->
-                    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
-                        <div class="card text-center">
-                            <img src="images/card_camera.png" class="card-img-top" alt="Câmera de reconhecimento">
-                            <div class="card-body">
-                                <!-- Título do card -->
-                                <p class="card-text">Câmera de reconhecimento</p>
-                                <!-- Informações adicionais no hover -->
-                                <div class="card-info">
-                                    <p class="card-text-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga vitae sint quo deleniti.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <!-- Segundo Card -->
-                    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
-                        <div class="card text-center">
-                            <img src="images/raspberry_pi.png" class="card-img-top" alt="Placa Raspberry Pi">
-                            <div class="card-body">
-                                <!-- Título do card -->
-                                <p class="card-text">Placa Raspberry Pi</p>
-                                <!-- Informações adicionais no hover -->
-                                <div class="card-info">
-                                    <p class="card-text-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur hic enim officiis.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
         </section>
     </main>
