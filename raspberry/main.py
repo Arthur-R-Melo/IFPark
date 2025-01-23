@@ -10,17 +10,17 @@ statusPortao = False
 
 def detectMovment():
     # Define as coordenadas do quadrado (x, y, largura, altura)
-    square_x = 100
-    square_y = 100
+    square_x = 300
+    square_y = 400
     square_width = 100
     square_height = 100
 
-    # Inicializa a captura de vídeo com libcamera via GStreamer
+    # Inicializa a captura de vï¿½deo com libcamera via GStreamer
     pipeline = (
     "libcamerasrc ! video/x-raw, width=640, height=480, framerate=30/1 ! "
     "videoconvert ! appsink"
     )
-    cap = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
+    cap = cv2.VideoCapture("C:/Users/0068943/Desktop/video98.mp4")
 
     # LÃª o primeiro frame
     ret, prev_frame = cap.read()
@@ -85,7 +85,9 @@ def controlaPortao(jaison):
     if jaison["status"] == True:
         if statusPortao == False and jaison["placa"] == True:
             protoboard.abrePortao()
+            time.sleep(5)
             statusPortao = True
+            exit()
         elif statusPortao == True and jaison['carro'] == False:
             protoboard.fechaPortao()
             statusPortao = False
