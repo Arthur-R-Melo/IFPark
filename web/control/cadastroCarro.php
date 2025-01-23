@@ -13,7 +13,7 @@ try {
     $conn = getConnection();
     // Processa o formulário quando enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $placa = $_POST['placa'];
+        $placa = strtoupper($_POST['placa']);
         $proprietario = $_POST['proprietario'];
         $instituicao = $_SESSION['instituicao_ID'];
 
